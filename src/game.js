@@ -239,7 +239,7 @@ async function ecma() {
         'European Computer Manufacturers Association']);
     if (answer) {
         if (answer == 4) {
-            return right('Unbelivable! You know more then others</p>');
+            return right('Unbelivable! You know more then others');
         }
         else {
             return wrong('It was a hard question and you are failed');
