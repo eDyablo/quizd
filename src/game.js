@@ -389,6 +389,20 @@ async function whatFollowsIfExpression() {
     }
 }
 
+async function whatRetunsFalse() {
+    let answer = await choose('Which of the following statements returns false?',
+        ["'myName'.length > 2",
+        '3 * 4 < 15',
+        '4 / 2 == 2',
+        "'inputColor'.length < 4"]);
+    if (answer == 4) {
+        return right('Good shot. You are very good at logical expressions');
+    }
+    else {
+        return wrong("The answer is wrong. The statement returns true");
+    }
+}
+
 async function game() {
     let levels = [
         nameYourself,
@@ -405,6 +419,7 @@ async function game() {
         unSupportedType,
         notAComparator,
         logicalExpression,
+        whatRetunsFalse,
         ecma,
         notANumber,
         yourTeacher
