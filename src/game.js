@@ -59,7 +59,8 @@ async function confirm(message) {
             resolve(answer);
         }
         let ticker = function() {
-            creditsDisplay.innerText = --credits;
+            credits -= tickerStep;
+            creditsDisplay.innerText = credits;
             if (credits <= 0) {
                 endDialog(null);
             }
@@ -100,7 +101,8 @@ async function choose(message, choices) {
             resolve(answer);
         }
         let ticker = function() {
-            creditsDisplay.innerText = --credits;
+            credits -= tickerStep;
+            creditsDisplay.innerText = credits;
             if (credits <= 0) {
                 endDialog(null)
             }
@@ -179,6 +181,12 @@ async function nameYourself() {
         document.fgColor = 'darkgray';
         credits = 1;
         tickerInterval = 1000 * 60 * 60 * 24;
+    }
+    if (name == 'Scrooge McDuck') {
+        document.bgColor = 'gold';
+        credits = 100;
+        tickerStep = -1;
+        tickerInterval = 100;
     }
     say('Nice to meet you, ' + name);
     return name;
@@ -499,6 +507,7 @@ async function wayToDeclareVariable() {
 var playerName;
 var credits = 100;
 var tickerInterval = 1000;
+var tickerStep = 1;
 
 async function game() {
     let levels = [
