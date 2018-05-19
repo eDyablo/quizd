@@ -141,6 +141,9 @@ async function choose(message, choices) {
 
 function right(message) {
     say(message);
+    if (playerName == 'Joker') {
+        credits *= 2;
+    }
     return true;
 }
 
@@ -168,6 +171,12 @@ async function nameYourself() {
     }
     if (name == 'Deadpool') {
         document.bgColor = 'darkred';
+        credits = 1;
+        tickerInterval = 1000 * 60 * 60 * 24;
+    }
+    if (name == 'Joker') {
+        document.bgColor = 'purple';
+        document.fgColor = 'darkgray';
         credits = 1;
         tickerInterval = 1000 * 60 * 60 * 24;
     }
@@ -533,6 +542,7 @@ async function game() {
 
     if (pass) {
         document.bgColor = 'darkseagreen';
+        document.fgColor = 'black';
         yell('You win!');
         claim('Your score is ' + credits + ' points');
     }
