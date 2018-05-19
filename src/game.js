@@ -445,9 +445,11 @@ async function wayToDeclareVariable() {
     }
 }
 
+var playerName;
+var credits = 100;
+
 async function game() {
     let levels = [
-        nameYourself,
         javaScriptAndJava,
         howToStartJavaScript,
         caseSensitivity,
@@ -473,6 +475,8 @@ async function game() {
     document.body.style.textAlign = 'center';
 
     yell('The Quiz');
+
+    playerName = await nameYourself();
 
     var pass = false;
     var index;
