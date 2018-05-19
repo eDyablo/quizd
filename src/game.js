@@ -279,12 +279,27 @@ async function yourTeacher() {
     }
 }
 
+async function howToStartJavaScript() {
+    let answer = await choose('How can we start or include JavaScript?',
+        ['language tag',
+        'none of above',
+        'script tag',
+        'javascript tag']);
+    if (answer == 3) {
+        return right('Right. You know how to start javascript');
+    }
+    else {
+        return wrong('Nope. You have to review javascript basics')
+    }
+}
+
 async function game() {
     let levels = [
         //nameYourself,
         //howOldAreYou,
         //canWeMoveForward,
         //javaScriptAndJava,
+        howToStartJavaScript,
         unSupportedType,
         howToWriteThings,
         logicalExpression,
