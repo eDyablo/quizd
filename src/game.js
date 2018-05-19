@@ -53,8 +53,16 @@ async function confirm(message) {
         let creditsDisplay = document.createElement('div');
         creditsDisplay.innerText = credits;
         dialogFrame.appendChild(creditsDisplay);
+        function endDialog(answer) {
+            clearInterval(tickerId);
+            document.body.removeChild(dialogFrame);
+            resolve(answer);
+        }
         let ticker = function() {
             creditsDisplay.innerText = --credits;
+            if (credits <= 0) {
+                endDialog(null);
+            }
         }
         let tickerId = setInterval(ticker, tickerInterval);
         let messageDisplay = document.createElement('p');
@@ -63,16 +71,12 @@ async function confirm(message) {
         let yesButton = document.createElement('button');
         yesButton.innerText = 'Yes';
         yesButton.onclick = function(event) {
-            clearInterval(tickerId);
-            document.body.removeChild(dialogFrame);
-            resolve(true);
+            endDialog(true);
         }
         let noButton = document.createElement('button');
         noButton.innerText = 'No';
         noButton.onclick = function(event) {
-            clearInterval(tickerId);
-            document.body.removeChild(dialogFrame);
-            resolve(false);
+            endDialog(false);
         }
         dialogFrame.appendChild(yesButton);
         dialogFrame.appendChild(noButton);
@@ -90,8 +94,16 @@ async function choose(message, choices) {
         let creditsDisplay = document.createElement('div');
         creditsDisplay.innerText = credits;
         dialogFrame.appendChild(creditsDisplay);
+        function endDialog(answer) {
+            clearInterval(tickerId);
+            document.body.removeChild(dialogFrame);
+            resolve(answer);
+        }
         let ticker = function() {
             creditsDisplay.innerText = --credits;
+            if (credits <= 0) {
+                endDialog(null)
+            }
         }
         let tickerId = setInterval(ticker, tickerInterval);
         let messageDisplay = document.createElement('p');
@@ -117,9 +129,7 @@ async function choose(message, choices) {
                 event.target.style.fontSize = '100%';
             }
             choiceLine.onclick = function(event) {
-                clearInterval(tickerId);
-                document.body.removeChild(dialogFrame);
-                resolve(event.target.id);
+                endDialog(event.target.id);
             }
             choicesList.appendChild(choiceLine);
         }
