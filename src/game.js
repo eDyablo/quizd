@@ -346,6 +346,20 @@ async function commentTheText() {
     }
 }
 
+async function logToConsole() {
+    let answer = await choose('Which of the following is the correct way to log a statement to the console?',
+        ['consolelog("Hello world")',
+        'console.log("Hello world")',
+        'console.log{"Hello world"}',
+        'consolelog("Hello world")']);
+    if (answer == 2) {
+        return right('Great job. Logging is a good tool and you know how to use it');
+    }
+    else {
+        return wrong("Failure. Logging is a good tool, you have to know it");
+    }
+}
+
 async function game() {
     let levels = [
         nameYourself,
@@ -356,6 +370,7 @@ async function game() {
         lengthOfThisString,
         commentTheText,
         canWeMoveForward,
+        logToConsole,
         mathCeil,
         unSupportedType,
         logicalExpression,
