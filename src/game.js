@@ -360,6 +360,22 @@ async function logToConsole() {
     }
 }
 
+async function notAComparator() {
+    let answer = await choose('Which of the following is NOT a comparator operation in JavaScript?',
+        [
+        '<',
+        '<==',
+        '!==',
+        '===',
+        '>']);
+    if (answer == 2) {
+        return right('Very good. You are good at the comparison operations');
+    }
+    else {
+        return wrong("You didn't recognize wrong comparator operation");
+    }
+}
+
 async function game() {
     let levels = [
         nameYourself,
@@ -373,6 +389,7 @@ async function game() {
         logToConsole,
         mathCeil,
         unSupportedType,
+        notAComparator,
         logicalExpression,
         ecma,
         notANumber,
