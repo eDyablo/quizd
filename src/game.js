@@ -75,9 +75,13 @@ async function confirm(message) {
 async function choose(message, choices) {
     let dialog = new Promise(function(resolve, reject) {
         let dialogFrame = document.createElement('div');
+        dialogFrame.style.display = 'inline-block';
         dialogFrame.innerHTML = '<p>' + message + '</p>';
         let choicesList = document.createElement('ul');
-        choicesList.style.listStyleType = 'none'
+        choicesList.style.listStyleType = 'none';
+        choicesList.style.paddingLeft = 0;
+        choicesList.style.listStyle = 'none';
+        choicesList.style.display = 'inline=block';
         dialogFrame.appendChild(choicesList);
         for (var i = 0; i < choices.length; i++) {
             let choiceLine = document.createElement('li');
@@ -94,11 +98,11 @@ async function choose(message, choices) {
             }
             choiceLine.onclick = function(event) {
                 document.body.removeChild(dialogFrame);
-                resolve(event.target.id)
+                resolve(event.target.id);
             }
             choicesList.appendChild(choiceLine);
         }
-        document.body.appendChild(dialogFrame)
+        document.body.appendChild(dialogFrame);
         dialogFrame.scrollIntoView();
     });
     return await dialog;
@@ -277,10 +281,10 @@ async function yourTeacher() {
 
 async function game() {
     let levels = [
-        nameYourself,
+        //nameYourself,
         //howOldAreYou,
         //canWeMoveForward,
-        javaScriptAndJava,
+        //javaScriptAndJava,
         unSupportedType,
         howToWriteThings,
         logicalExpression,
