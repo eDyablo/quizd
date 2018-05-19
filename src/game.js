@@ -204,37 +204,23 @@ function level10() {
     }
 }
 
-let pass = level1();
+var levels = [
+    level1,
+    level2,
+    level3,
+    level4,
+    level5,
+    level6,
+    level7,
+    level8,
+    level9,
+    level10
+]
+
+let pass = levels.every(level => level())
 if (pass) {
-    pass = level2();
-}
-if (pass) {
-    pass = level3();
-}
-if (pass) {
-    pass = level4();
-}
-if (pass) {
-    pass = level5();
-}
-if (pass) {
-    pass = level6();
-}
-if (pass) {
-    pass = level7();
-}
-if (pass) {
-    pass = level8();
-}
-if (pass) {
-    pass = level9();
-}
-if (pass) {
-    pass = level10();
-}
-if (pass) {
-    yell('You win!');
+    yell('You win!')
 }
 else {
-    yell('Game over');
+    yell('Game over')
 }
