@@ -14,8 +14,7 @@ function announceLevel(level) {
     document.write('<p id="level">Level ' + level +'</p>');
 }
 
-function level1() {
-    announceLevel(1);
+function nameYourself() {
     let name = prompt('Enter your name');
     if (name) {
         if (name == 'Dart Wader') {
@@ -33,8 +32,7 @@ function level1() {
     }
 }
 
-function level2() {
-    announceLevel(2);
+function howOldAreYou() {
     let age = prompt('Enter your age');
     if (age) {
         say('Your age is ' + age);
@@ -56,8 +54,7 @@ function level2() {
     }
 }
 
-function level3() {
-    announceLevel(3);
+function canWeMoveForward() {
     let moveForward = confirm('Can we move forward?');
     if (moveForward == false) {
         say('You decided to stop playing. Good bye!');
@@ -69,8 +66,7 @@ function level3() {
     }
 }
 
-function level4() {
-    announceLevel(4);
+function javaScriptAndJava() {
     let answer = confirm('JavaScript is some kind of Java?');
     if (answer == false) {
         say('You are right! JavaScript is completelly different language');
@@ -82,8 +78,7 @@ function level4() {
     }
 }
 
-function level5() {
-    announceLevel(5);
+function unSupportedType() {
     let answer = prompt('What data type is not supported by JavaScript?\n\n' +
         '1: numerical\n' +
         '2: textual\n' +
@@ -104,8 +99,7 @@ function level5() {
     }
 }
 
-function level6() {
-    announceLevel(6);
+function howToWriteThings() {
     let answer = prompt('How would you write "hello" to the document?\n\n' +
         '1: alert("hello")\n' +
         '2: document.say("hello")\n' +
@@ -126,8 +120,7 @@ function level6() {
     }
 }
 
-function level7() {
-    announceLevel(7);
+function logicalExpression() {
     let answer = prompt('What the expression A <= B means?\n\n' +
         '1: A is less then B\n' +
         '2: A is not equal to B\n' +
@@ -148,8 +141,7 @@ function level7() {
     }
 }
 
-function level8() {
-    announceLevel(8);
+function ecma() {
     let answer = prompt('JavaScript is known as ECMAScript. What ECMA means?\n\n' +
         '1: Electronic Components and Maintenance Applications\n' +
         '2: Electronic Components of Microsoft and Apple\n' +
@@ -170,8 +162,7 @@ function level8() {
     }
 }
 
-function level9() {
-    announceLevel(8);
+function notANumber() {
     let answer = prompt('What Nan means?\n\n' +
         '1: Number and name\n' +
         '2: Not a number\n' +
@@ -192,8 +183,7 @@ function level9() {
     }
 }
 
-function level10() {
-    announceLevel(10);
+function yourTeacher() {
     let answer = prompt("What is your teacher's name?");
     if (answer) {
         say('' + answer + ' taught you very well</p>');
@@ -205,19 +195,22 @@ function level10() {
 }
 
 var levels = [
-    level1,
-    level2,
-    level3,
-    level4,
-    level5,
-    level6,
-    level7,
-    level8,
-    level9,
-    level10
+    nameYourself,
+    howOldAreYou,
+    canWeMoveForward,
+    javaScriptAndJava,
+    unSupportedType,
+    howToWriteThings,
+    logicalExpression,
+    ecma,
+    notANumber,
+    yourTeacher
 ]
 
-let pass = levels.every(level => level())
+let pass = levels.every(function(level, index) {
+    announceLevel(index + 1)
+    return level()
+})
 if (pass) {
     yell('You win!')
 }
