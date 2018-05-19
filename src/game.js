@@ -32,7 +32,7 @@ async function ask(message) {
     let dialog = new Promise(function(resolve, reject) {
         let dialogFrame = document.createElement('div');
         dialogFrame.innerHTML = '<p>' + message + '</p>';
-        document.body.appendChild(dialogFrame);
+        
         let input = document.createElement('input');
         input.type = 'text';
         input.onchange = function(event) {
@@ -40,7 +40,8 @@ async function ask(message) {
             resolve(event.target.value);
         };
         dialogFrame.appendChild(input);
-        input.scrollIntoView();
+        document.body.appendChild(dialogFrame);
+        dialogFrame.scrollIntoView();
         input.focus();
     });
     return await dialog;
@@ -64,9 +65,41 @@ async function confirm(message) {
         }
         dialogFrame.appendChild(yesButton);
         dialogFrame.appendChild(noButton);
-        yesButton.scrollIntoView();
         yesButton.focus();
         document.body.appendChild(dialogFrame);
+        dialogFrame.scrollIntoView();
+    });
+    return await dialog;
+}
+
+async function choose(message, choices) {
+    let dialog = new Promise(function(resolve, reject) {
+        let dialogFrame = document.createElement('div');
+        dialogFrame.innerHTML = '<p>' + message + '</p>';
+        let choicesList = document.createElement('ul');
+        choicesList.style.listStyleType = 'none'
+        dialogFrame.appendChild(choicesList);
+        for (var i = 0; i < choices.length; i++) {
+            let choiceLine = document.createElement('li');
+            choiceLine.innerText = choices[i];
+            choiceLine.id = i + 1;
+            choiceLine.style.lineHeight = '2';
+            choiceLine.onmouseover = function(event) {
+                event.target.style.fontWeight = 'bold';
+                event.target.style.fontSize = '120%';
+            }
+            choiceLine.onmouseout = function(event) {
+                event.target.style.fontWeight = 'normal';
+                event.target.style.fontSize = '100%';
+            }
+            choiceLine.onclick = function(event) {
+                document.body.removeChild(dialogFrame);
+                resolve(event.target.id)
+            }
+            choicesList.appendChild(choiceLine);
+        }
+        document.body.appendChild(dialogFrame)
+        dialogFrame.scrollIntoView();
     });
     return await dialog;
 }
@@ -138,11 +171,11 @@ async function javaScriptAndJava() {
 }
 
 async function unSupportedType() {
-    let answer = await ask('What data type is not supported by JavaScript?' +
-        '</br>1: numerical\n' +
-        '</br>2: textual\n' +
-        '</br>3: graphical\n' +
-        '</br>4: object\n');
+    let answer = await choose('What data type is not supported by JavaScript?',
+            ['numerical',
+            'textual',
+            'graphical',
+            'object']);
     if (answer) {
         if (answer != 3) {
             return wrong('Nope! JavaScript knows the type');
@@ -157,11 +190,11 @@ async function unSupportedType() {
 }
 
 async function howToWriteThings() {
-    let answer = await ask('How would you write "hello" to the document?' +
-        '</br>1: alert("hello")' +
-        '</br>2: document.say("hello")' +
-        '</br>3: document.write("hello")' +
-        '</br>4: my.document("hello")');
+    let answer = await choose('How would you write "hello" to the document?',
+        ['alert("hello")',
+        'document.say("hello")',
+        'document.write("hello")',
+        'document("hello")']);
     if (answer) {
         if (answer == 3) {
             return right('Super! You know how to write things');
@@ -176,11 +209,11 @@ async function howToWriteThings() {
 }
 
 async function logicalExpression() {
-    let answer = await ask('What the expression A <= B means?' +
-        '</br>1: A is less then B' +
-        '</br>2: A is not equal to B' +
-        '</br>3: Move B to A' +
-        '</br>4: B is not less then A');
+    let answer = await choose('What the expression A <= B means?',
+        ['A is less then B',
+        'A is not equal to B',
+        'Move B to A',
+        'B is not less then A']);
     if (answer) {
         if (answer == 4) {
             return right('Fantastic! It is hard to confuse you');
@@ -195,11 +228,11 @@ async function logicalExpression() {
 }
 
 async function ecma() {
-    let answer = await ask('JavaScript is known as ECMAScript. What ECMA means?' +
-        '</br>1: Electronic Components and Maintenance Applications' +
-        '</br>2: Electronic Components of Microsoft and Apple' +
-        '</br>3: European Computer Maintainers Association' +
-        '</br>4: European Computer Manufacturers Association');
+    let answer = await choose('JavaScript is known as ECMAScript. What ECMA means?',
+        ['Electronic Components and Maintenance Applications',
+        'Electronic Components of Microsoft and Apple',
+        'European Computer Maintainers Association',
+        'European Computer Manufacturers Association']);
     if (answer) {
         if (answer == 4) {
             return right('Unbelivable! You know more then others</p>');
@@ -214,11 +247,11 @@ async function ecma() {
 }
 
 async function notANumber() {
-    let answer = await ask('What Nan means?' +
-        '</br>1: Number and name' +
-        '</br>2: Not a number' +
-        '</br>3: Not a name' +
-        '</br>4: Never ask noone');
+    let answer = await choose('What Nan means?',
+        ['Number and name',
+        'Not a number',
+        'Not a name',
+        'Never ask noone']);
     if (answer) {
         if (answer == 2) {
             return right('Your have exceptional knowledge');
@@ -243,10 +276,10 @@ async function yourTeacher() {
 }
 
 async function game() {
-    var levels = [
+    let levels = [
         nameYourself,
-        howOldAreYou,
-        canWeMoveForward,
+        //howOldAreYou,
+        //canWeMoveForward,
         javaScriptAndJava,
         unSupportedType,
         howToWriteThings,
