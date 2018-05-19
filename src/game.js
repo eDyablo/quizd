@@ -126,7 +126,12 @@ async function nameYourself() {
             document.fgColor = 'white';
         }
         if (name == 'Luke Skywalker') {
+            document.bgColor = 'lightblue';
             claim('I am your father, Luke');
+        }
+        if (name == 'Yoda') {
+            document.bgColor = 'lightgreen';
+            claim('The Force let be you with');
         }
         return right('Nice to meet you, ' + name);
     }
@@ -494,6 +499,7 @@ async function game() {
     }
     else {
         document.bgColor = 'lightcoral';
+        document.fgColor = 'black';
         yell('Game over');
         say('You passed ' + index + ' level(s)');
     }
