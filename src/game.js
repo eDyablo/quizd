@@ -332,16 +332,30 @@ async function lengthOfThisString() {
     }
 }
 
+async function commentTheText() {
+    let answer = await choose('Which of the following will correctly comment the text?',
+        ['// "the text" //',
+        '/ "the text" /',
+        '*/ "the text" /*',
+        '\\\\ "the text" \\\\']);
+    if (answer == 1) {
+        return right('Nice. It is a useful to know how to comment things in your code');
+    }
+    else {
+        return wrong("Sorry, but you don't know how to use comments");
+    }
+}
+
 async function game() {
     let levels = [
-        //nameYourself,
-        //howOldAreYou,
-        //canWeMoveForward,
-        //javaScriptAndJava,
+        nameYourself,
+        javaScriptAndJava,
         howToStartJavaScript,
         caseSensitivity,
         howToWriteThings,
         lengthOfThisString,
+        commentTheText,
+        canWeMoveForward,
         mathCeil,
         unSupportedType,
         logicalExpression,
