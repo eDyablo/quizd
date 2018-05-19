@@ -167,6 +167,11 @@ async function nameYourself() {
             claim('Train yourself to let go of everything you fear to lose');
             tickerInterval = 3000;
         }
+        if (name == 'Deadpool') {
+            document.bgColor = 'darkred';
+            credits = 1;
+            tickerInterval = 1000 * 60 * 60 * 24;
+        }
         return right('Nice to meet you, ' + name);
     }
     else {
