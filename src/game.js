@@ -361,9 +361,8 @@ async function logToConsole() {
 }
 
 async function notAComparator() {
-    let answer = await choose('Which of the following is NOT a comparator operation in JavaScript?',
-        [
-        '<',
+    let answer = await choose('Which of the following is <b>not</b> a comparator operation in JavaScript?',
+        ['<',
         '<==',
         '!==',
         '===',
@@ -376,6 +375,20 @@ async function notAComparator() {
     }
 }
 
+async function whatFollowsIfExpression() {
+    let answer = await choose('What follows after the expression in an <b>if</b> statement?',
+        ['a colon',
+        'curly braces',
+        'square brackets',
+        'brackets']);
+    if (answer == 2) {
+        return right('Very nice. The if statement is known to you');
+    }
+    else {
+        return wrong("It can't follow after the expression in an if statment");
+    }
+}
+
 async function game() {
     let levels = [
         nameYourself,
@@ -385,6 +398,7 @@ async function game() {
         howToWriteThings,
         lengthOfThisString,
         commentTheText,
+        whatFollowsIfExpression,
         canWeMoveForward,
         logToConsole,
         mathCeil,
