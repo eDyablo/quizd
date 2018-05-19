@@ -131,7 +131,7 @@ async function nameYourself() {
         }
         if (name == 'Yoda') {
             document.bgColor = 'lightgreen';
-            claim('The Force let be you with');
+            claim('Train yourself to let go of everything you fear to lose');
         }
         return right('Nice to meet you, ' + name);
     }
