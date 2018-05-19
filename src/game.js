@@ -431,6 +431,20 @@ async function whatBestDescribesVariables() {
     }
 }
 
+async function wayToDeclareVariable() {
+    let answer = await choose('Which of the following is the correct way to declare a variable?',
+        ['variable myName',
+        'Var myName',
+        'vary myName',
+        'var myName']);
+    if (answer == 4) {
+        return right('Perfect match. You are good to go');
+    }
+    else {
+        return wrong("Nice try. But it's wrong");
+    }
+}
+
 async function game() {
     let levels = [
         nameYourself,
@@ -440,6 +454,7 @@ async function game() {
         howToWriteThings,
         lengthOfThisString,
         commentTheText,
+        wayToDeclareVariable,
         whatFollowsIfExpression,
         canWeMoveForward,
         whatBestDescribesVariables,
