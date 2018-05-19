@@ -304,6 +304,34 @@ async function caseSensitivity() {
     }
 }
 
+async function mathCeil() {
+    let rightAnswer = Math.ceil(-45.95);
+    let answer = await choose('var value = Math.ceil(-45.95)',
+        [rightAnswer - 1,
+        rightAnswer,
+        rightAnswer + 1]);
+    if (answer == 2) {
+        return right('Excelent! You know basic math functions');
+    }
+    else {
+        return wrong('Unfortunately it is wrong. We recomend you to learn basic math functions')
+    }
+}
+
+async function lengthOfThisString() {
+    let answer = await choose('Which of the following is the correct way of returning the length of this string?',
+        ["'string',length",
+        "string,length",
+        "string.length",
+        "'string'.length"]);
+    if (answer == 4) {
+        return right('Perfect! It looks like you know how to deal with strings');
+    }
+    else {
+        return wrong('Wrong answer. Be careful next time');
+    }
+}
+
 async function game() {
     let levels = [
         //nameYourself,
@@ -313,6 +341,8 @@ async function game() {
         howToStartJavaScript,
         caseSensitivity,
         howToWriteThings,
+        lengthOfThisString,
+        mathCeil,
         unSupportedType,
         logicalExpression,
         ecma,
