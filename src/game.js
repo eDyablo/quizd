@@ -289,7 +289,18 @@ async function howToStartJavaScript() {
         return right('Right. You know how to start javascript');
     }
     else {
-        return wrong('Nope. You have to review javascript basics')
+        return wrong('Nope. You have to review javascript basics');
+    }
+}
+
+async function caseSensitivity() {
+    let answer = await choose('Is JavaScript case sensitive?',
+        ['True', 'False']);
+    if (answer == 1) {
+        return right('Sure. It is case sensitive');
+    }
+    else {
+        return wrong('Please remember that JavaScript is case sensitive');
     }
 }
 
@@ -300,8 +311,9 @@ async function game() {
         //canWeMoveForward,
         //javaScriptAndJava,
         howToStartJavaScript,
-        unSupportedType,
+        caseSensitivity,
         howToWriteThings,
+        unSupportedType,
         logicalExpression,
         ecma,
         notANumber,
