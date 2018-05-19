@@ -206,62 +206,35 @@ function level10() {
 
 let pass = level1();
 if (pass) {
-    let pass = level2();
-    if (pass) {
-        let pass = level3();
-        if (pass) {
-            let pass = level4();
-            if (pass) {
-                let pass = level5();
-                if (pass) {
-                    let pass = level6();
-                    if (pass) {
-                        let pass = level7();
-                        if (pass) {
-                            let pass = level8();
-                            if (pass) {
-                                let pass = level9();
-                                if (pass) {
-                                    let pass = level10();
-                                    if (pass) {
-                                        yell('You win');
-                                    }   
-                                    else {
-                                        yell('Game over')
-                                    }
-                                }
-                                else {
-                                    yell('Game over')
-                                }
-                            }
-                            else {
-                                yell('Game over')
-                            }
-                        }
-                        else {
-                            yell('Game over')
-                        }
-                    }
-                    else {
-                        yell('Game over')
-                    }
-                }
-                else {
-                    yell('Game over')
-                }
-            }
-            else {
-                yell('Game over')
-            }
-        }
-        else {
-            yell('Game over')
-        }
-    }
-    else {
-        yell('Game over')
-    }
+    pass = level2();
+}
+if (pass) {
+    pass = level3();
+}
+if (pass) {
+    pass = level4();
+}
+if (pass) {
+    pass = level5();
+}
+if (pass) {
+    pass = level6();
+}
+if (pass) {
+    pass = level7();
+}
+if (pass) {
+    pass = level8();
+}
+if (pass) {
+    pass = level9();
+}
+if (pass) {
+    pass = level10();
+}
+if (pass) {
+    yell('You win!');
 }
 else {
-    yell('Game over')
+    yell('Game over');
 }
