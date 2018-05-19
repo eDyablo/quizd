@@ -164,7 +164,7 @@ async function nameYourself() {
     if (name == 'Yoda') {
         document.bgColor = 'lightgreen';
         claim('Train yourself to let go of everything you fear to lose');
-        tickerInterval = 3000;
+        tickerInterval = 2000;
     }
     if (name == 'Deadpool') {
         document.bgColor = 'darkred';
