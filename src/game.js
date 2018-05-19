@@ -50,16 +50,27 @@ async function ask(message) {
 async function confirm(message) {
     let dialog = new Promise(function(resolve, reject) {
         let dialogFrame = document.createElement('div');
-        dialogFrame.innerHTML = '<p>' + message + '</p>';
+        let creditsDisplay = document.createElement('div');
+        creditsDisplay.innerText = credits;
+        dialogFrame.appendChild(creditsDisplay);
+        let ticker = function() {
+            creditsDisplay.innerText = --credits;
+        }
+        let tickerId = setInterval(ticker, tickerInterval);
+        let messageDisplay = document.createElement('p');
+        messageDisplay.innerText = message;
+        dialogFrame.appendChild(messageDisplay);
         let yesButton = document.createElement('button');
         yesButton.innerText = 'Yes';
         yesButton.onclick = function(event) {
+            clearInterval(tickerId);
             document.body.removeChild(dialogFrame);
             resolve(true);
         }
         let noButton = document.createElement('button');
         noButton.innerText = 'No';
         noButton.onclick = function(event) {
+            clearInterval(tickerId);
             document.body.removeChild(dialogFrame);
             resolve(false);
         }
@@ -76,7 +87,16 @@ async function choose(message, choices) {
     let dialog = new Promise(function(resolve, reject) {
         let dialogFrame = document.createElement('div');
         dialogFrame.style.display = 'inline-block';
-        dialogFrame.innerHTML = '<p>' + message + '</p>';
+        let creditsDisplay = document.createElement('div');
+        creditsDisplay.innerText = credits;
+        dialogFrame.appendChild(creditsDisplay);
+        let ticker = function() {
+            creditsDisplay.innerText = --credits;
+        }
+        let tickerId = setInterval(ticker, tickerInterval);
+        let messageDisplay = document.createElement('p');
+        messageDisplay.innerText = message;
+        dialogFrame.appendChild(messageDisplay);
         let choicesList = document.createElement('ul');
         choicesList.style.listStyleType = 'none';
         choicesList.style.paddingLeft = 0;
@@ -97,6 +117,7 @@ async function choose(message, choices) {
                 event.target.style.fontSize = '100%';
             }
             choiceLine.onclick = function(event) {
+                clearInterval(tickerId);
                 document.body.removeChild(dialogFrame);
                 resolve(event.target.id);
             }
@@ -124,14 +145,17 @@ async function nameYourself() {
         if (name == 'Dart Wader') {
             document.bgColor = 'black';
             document.fgColor = 'white';
+            credits = 1000;
         }
         if (name == 'Luke Skywalker') {
             document.bgColor = 'lightblue';
             claim('I am your father, Luke');
+            credits = 50;
         }
         if (name == 'Yoda') {
             document.bgColor = 'lightgreen';
             claim('Train yourself to let go of everything you fear to lose');
+            tickerInterval = 3000;
         }
         return right('Nice to meet you, ' + name);
     }
@@ -452,6 +476,7 @@ async function wayToDeclareVariable() {
 
 var playerName;
 var credits = 100;
+var tickerInterval = 1000;
 
 async function game() {
     let levels = [
