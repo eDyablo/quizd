@@ -151,32 +151,28 @@ function wrong(message) {
 
 async function nameYourself() {
     let name = await ask('Enter your name');
-    if (name) {
-        if (name == 'Dart Wader') {
-            document.bgColor = 'black';
-            document.fgColor = 'white';
-            credits = 1000;
-        }
-        if (name == 'Luke Skywalker') {
-            document.bgColor = 'lightblue';
-            claim('I am your father, Luke');
-            credits = 50;
-        }
-        if (name == 'Yoda') {
-            document.bgColor = 'lightgreen';
-            claim('Train yourself to let go of everything you fear to lose');
-            tickerInterval = 3000;
-        }
-        if (name == 'Deadpool') {
-            document.bgColor = 'darkred';
-            credits = 1;
-            tickerInterval = 1000 * 60 * 60 * 24;
-        }
-        return right('Nice to meet you, ' + name);
+    if (name == 'Dart Wader') {
+        document.bgColor = 'black';
+        document.fgColor = 'white';
+        credits = 1000;
     }
-    else {
-        return false;
+    if (name == 'Luke Skywalker') {
+        document.bgColor = 'lightblue';
+        claim('I am your father, Luke');
+        credits = 50;
     }
+    if (name == 'Yoda') {
+        document.bgColor = 'lightgreen';
+        claim('Train yourself to let go of everything you fear to lose');
+        tickerInterval = 3000;
+    }
+    if (name == 'Deadpool') {
+        document.bgColor = 'darkred';
+        credits = 1;
+        tickerInterval = 1000 * 60 * 60 * 24;
+    }
+    say('Nice to meet you, ' + name);
+    return name;
 }
 
 async function howOldAreYou() {
@@ -204,6 +200,8 @@ async function canWeMoveForward() {
         return wrong('You decided to stop playing. Good bye!');
     }
     else {
+        if (playerName == 'Luke Skywalker')
+            credits += 50;
         return right('Wow! Lets move on!');
     }
 }
