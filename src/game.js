@@ -403,6 +403,34 @@ async function whatRetunsFalse() {
     }
 }
 
+async function whatReturnsValueOfTwo() {
+    let answer = await choose('Which statement returns the value of 2?',
+        ['7 + 3 / 5',
+        "'hi'.length - 1 * 2",
+        "(3 + 1) / 'hi'.length",
+        '4 + (4 / 8)']);
+    if (answer == 3) {
+        return right('You are right again! You did calculations very good');
+    }
+    else {
+        return wrong("I did wrong calculations");
+    }
+}
+
+async function whatBestDescribesVariables() {
+    let answer = await choose('What best describes the variables in JavaScript?',
+        ['To allow the user to change language settings',
+        "To allow the user to change a value's data type",
+        'To allow the user to save and call values',
+        'To allow the user to declare a new data type']);
+    if (answer == 3) {
+        return right('Perfect choice. The main purpose of variables is to store values');
+    }
+    else {
+        return wrong("Wrong choice. You have to review a main purpose of variables");
+    }
+}
+
 async function game() {
     let levels = [
         nameYourself,
@@ -414,12 +442,14 @@ async function game() {
         commentTheText,
         whatFollowsIfExpression,
         canWeMoveForward,
+        whatBestDescribesVariables,
         logToConsole,
         mathCeil,
         unSupportedType,
         notAComparator,
         logicalExpression,
         whatRetunsFalse,
+        whatReturnsValueOfTwo,
         ecma,
         notANumber,
         yourTeacher
