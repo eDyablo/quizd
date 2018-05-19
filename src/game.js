@@ -1,80 +1,82 @@
 function say(message) {
-    document.write('<p>', message, '</p>');
+    document.write('<p>', message, '</p>')
 }
 
 function claim(message) {
-    document.write('<h2>', message, '</h2>');
+    document.write('<h2>', message, '</h2>')
 }
 
 function yell(message) {
-    document.write('<h1>', message, '</h1>');
+    document.write('<h1>', message, '</h1>')
 }
 
 function announceLevel(level) {
-    document.write('<p id="level">Level ' + level +'</p>');
+    document.write('<p id="level" style="color:blueviolet">Level ' + level +'</p>')
+}
+
+function right(message) {
+    say(message)
+    return true
+}
+
+function wrong(message) {
+    say(message)
+    return false
 }
 
 function nameYourself() {
-    let name = prompt('Enter your name');
+    let name = prompt('Enter your name')
     if (name) {
         if (name == 'Dart Wader') {
-            document.bgColor = 'black';
-            document.fgColor = 'white';
+            document.bgColor = 'black'
+            document.fgColor = 'white'
         }
         if (name == 'Luke Skywalker') {
-            claim('I am your father, Luke');
+            claim('I am your father, Luke')
         }
-        say('Nice to meet you, ' + name);
-        return true;
+        return right('Nice to meet you, ' + name)
     }
     else {
-        return false;
+        return false
     }
 }
 
 function howOldAreYou() {
-    let age = prompt('Enter your age');
+    let age = prompt('Enter your age')
     if (age) {
-        say('Your age is ' + age);
+        say('Your age is ' + age)
         if (age < 10) {
-            say('You are too young');
-            return false;
+            return wrong('You are too young')
         }
         if (age > 100) {
-            say('You are too old');
-            return false;
+            return wrong('You are too old')
         }
         else if (age >= 10 && age <= 100) {
-            say('You can pass');
-            return true;
+            return right('You can pass')
         }
     }
     else {
-        return false;
+        return false
     }
 }
 
 function canWeMoveForward() {
-    let moveForward = confirm('Can we move forward?');
+    let moveForward = confirm('Can we move forward?')
     if (moveForward == false) {
-        say('You decided to stop playing. Good bye!');
-        return false;
+        return wrong('You decided to stop playing. Good bye!')
     }
     else {
-        say('Wow! Lets move on!');
-        return true;
+        return right('Wow! Lets move on!')
     }
 }
 
 function javaScriptAndJava() {
-    let answer = confirm('JavaScript is some kind of Java?');
+    let answer = confirm('JavaScript is some kind of Java?')
     if (answer == false) {
-        say('You are right! JavaScript is completelly different language');
-        return true;
+        return right('You are right! JavaScript is completelly different language')
     }
     else {
-        say('Wrong. It has nothing to do with Java');
-        return false;
+        return wrong('Wrong. It has nothing to do with Java')
     }
 }
 
@@ -83,19 +85,17 @@ function unSupportedType() {
         '1: numerical\n' +
         '2: textual\n' +
         '3: graphical\n' +
-        '4: object\n');
+        '4: object\n')
     if (answer) {
         if (answer != 3) {
-            say('Nope! JavaScript knows the type');
-            return false;
+            return wrong('Nope! JavaScript knows the type')
         }
         else {
-            say('Well done! Keep it up');
-            return true;
+            return right('Well done! Keep it up')
         }
     }
     else {
-        return false;
+        return false
     }
 }
 
@@ -104,19 +104,17 @@ function howToWriteThings() {
         '1: alert("hello")\n' +
         '2: document.say("hello")\n' +
         '3: document.write("hello")\n' +
-        '4: my.document("hello")\n');
+        '4: my.document("hello")\n')
     if (answer) {
         if (answer == 3) {
-            say('Super! You know how to write things');
-            return true;
+            return right('Super! You know how to write things')
         }
         else {
-            say('Unfortunately it is not a correct way to say hello to the document');
-            return false;
+            return wrong('Unfortunately it is not a correct way to say hello to the document')
         }
     }
     else {
-        return false;
+        return false
     }
 }
 
@@ -125,19 +123,17 @@ function logicalExpression() {
         '1: A is less then B\n' +
         '2: A is not equal to B\n' +
         '3: Move B to A\n' +
-        '4: B is not less then A\n');
+        '4: B is not less then A\n')
     if (answer) {
         if (answer == 4) {
-            say('Fantastic! It is hard to confuse you');
-            return true;
+            return right('Fantastic! It is hard to confuse you')
         }
         else {
-            say('Oops! The expression means something else');
-            return false;
+            return wrong('Oops! The expression means something else')
         }
     }
     else {
-        return false;
+        return false
     }
 }
 
@@ -146,19 +142,17 @@ function ecma() {
         '1: Electronic Components and Maintenance Applications\n' +
         '2: Electronic Components of Microsoft and Apple\n' +
         '3: European Computer Maintainers Association\n' +
-        '4: European Computer Manufacturers Association\n');
+        '4: European Computer Manufacturers Association\n')
     if (answer) {
         if (answer == 4) {
-            say('Unbelivable! You know more then others</p>');
-            return true;
+            return right('Unbelivable! You know more then others</p>')
         }
         else {
-            say('It was a hard question and you are failed');
-            return false;
+            return wrong('It was a hard question and you are failed')
         }
     }
     else {
-        return false;
+        return false
     }
 }
 
@@ -167,30 +161,27 @@ function notANumber() {
         '1: Number and name\n' +
         '2: Not a number\n' +
         '3: Not a name\n' +
-        '4: Never ask noone\n');
+        '4: Never ask noone\n')
     if (answer) {
         if (answer == 2) {
-            say('Your have exceptional knowledge</p>');
-            return true;
+            return right('Your have exceptional knowledge</p>')
         }
         else {
-            say('You were close');
-            return false;
+            return wrong('You were close')
         }
     }
     else {
-        return false;
+        return false
     }
 }
 
 function yourTeacher() {
-    let answer = prompt("What is your teacher's name?");
+    let answer = prompt("What is your teacher's name?")
     if (answer) {
-        say('' + answer + ' taught you very well</p>');
-        return true;
+        return right('' + answer + ' taught you very well</p>')
     }
     else {
-        return false;
+        return false
     }
 }
 
@@ -207,10 +198,19 @@ var levels = [
     yourTeacher
 ]
 
-let pass = levels.every(function(level, index) {
+document.body.style.textAlign = 'center'
+
+yell('The Game')
+
+var pass = false
+for (let index = 0; index < levels.length; index++) {
+    var level = levels[index];
     announceLevel(index + 1)
-    return level()
-})
+    pass = level()
+    if (pass == false)
+        break
+}
+
 if (pass) {
     yell('You win!')
 }
