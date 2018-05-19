@@ -536,11 +536,13 @@ async function game() {
     if (pass) {
         document.bgColor = 'darkseagreen';
         yell('You win!');
+        claim('Your score is ' + credits + ' points');
     }
     else {
         document.bgColor = 'lightcoral';
         document.fgColor = 'black';
         yell('Game over');
         say('You passed ' + index + ' level(s)');
+        say('You have ' + credits + ' points left');
     }
 }
