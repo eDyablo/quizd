@@ -50,18 +50,33 @@ async function ask(message) {
 async function confirm(message) {
     let dialog = new Promise(function(resolve, reject) {
         let dialogFrame = document.createElement('div');
-        dialogFrame.innerHTML = '<p>' + message + '</p>';
+        let creditsDisplay = document.createElement('div');
+        creditsDisplay.innerText = credits;
+        dialogFrame.appendChild(creditsDisplay);
+        function endDialog(answer) {
+            clearInterval(tickerId);
+            document.body.removeChild(dialogFrame);
+            resolve(answer);
+        }
+        let ticker = function() {
+            creditsDisplay.innerText = --credits;
+            if (credits <= 0) {
+                endDialog(null);
+            }
+        }
+        let tickerId = setInterval(ticker, tickerInterval);
+        let messageDisplay = document.createElement('p');
+        messageDisplay.innerText = message;
+        dialogFrame.appendChild(messageDisplay);
         let yesButton = document.createElement('button');
         yesButton.innerText = 'Yes';
         yesButton.onclick = function(event) {
-            document.body.removeChild(dialogFrame);
-            resolve(true);
+            endDialog(true);
         }
         let noButton = document.createElement('button');
         noButton.innerText = 'No';
         noButton.onclick = function(event) {
-            document.body.removeChild(dialogFrame);
-            resolve(false);
+            endDialog(false);
         }
         dialogFrame.appendChild(yesButton);
         dialogFrame.appendChild(noButton);
@@ -76,7 +91,24 @@ async function choose(message, choices) {
     let dialog = new Promise(function(resolve, reject) {
         let dialogFrame = document.createElement('div');
         dialogFrame.style.display = 'inline-block';
-        dialogFrame.innerHTML = '<p>' + message + '</p>';
+        let creditsDisplay = document.createElement('div');
+        creditsDisplay.innerText = credits;
+        dialogFrame.appendChild(creditsDisplay);
+        function endDialog(answer) {
+            clearInterval(tickerId);
+            document.body.removeChild(dialogFrame);
+            resolve(answer);
+        }
+        let ticker = function() {
+            creditsDisplay.innerText = --credits;
+            if (credits <= 0) {
+                endDialog(null)
+            }
+        }
+        let tickerId = setInterval(ticker, tickerInterval);
+        let messageDisplay = document.createElement('p');
+        messageDisplay.innerText = message;
+        dialogFrame.appendChild(messageDisplay);
         let choicesList = document.createElement('ul');
         choicesList.style.listStyleType = 'none';
         choicesList.style.paddingLeft = 0;
@@ -97,8 +129,7 @@ async function choose(message, choices) {
                 event.target.style.fontSize = '100%';
             }
             choiceLine.onclick = function(event) {
-                document.body.removeChild(dialogFrame);
-                resolve(event.target.id);
+                endDialog(event.target.id);
             }
             choicesList.appendChild(choiceLine);
         }
@@ -120,19 +151,28 @@ function wrong(message) {
 
 async function nameYourself() {
     let name = await ask('Enter your name');
-    if (name) {
-        if (name == 'Dart Wader') {
-            document.bgColor = 'black';
-            document.fgColor = 'white';
-        }
-        if (name == 'Luke Skywalker') {
-            claim('I am your father, Luke');
-        }
-        return right('Nice to meet you, ' + name);
+    if (name == 'Dart Wader') {
+        document.bgColor = 'black';
+        document.fgColor = 'white';
+        credits = 1000;
     }
-    else {
-        return false;
+    if (name == 'Luke Skywalker') {
+        document.bgColor = 'lightblue';
+        claim('I am your father, Luke');
+        credits = 50;
     }
+    if (name == 'Yoda') {
+        document.bgColor = 'lightgreen';
+        claim('Train yourself to let go of everything you fear to lose');
+        tickerInterval = 2000;
+    }
+    if (name == 'Deadpool') {
+        document.bgColor = 'darkred';
+        credits = 1;
+        tickerInterval = 1000 * 60 * 60 * 24;
+    }
+    say('Nice to meet you, ' + name);
+    return name;
 }
 
 async function howOldAreYou() {
@@ -160,6 +200,8 @@ async function canWeMoveForward() {
         return wrong('You decided to stop playing. Good bye!');
     }
     else {
+        if (playerName == 'Luke Skywalker')
+            credits += 50;
         return right('Wow! Lets move on!');
     }
 }
@@ -445,9 +487,12 @@ async function wayToDeclareVariable() {
     }
 }
 
+var playerName;
+var credits = 100;
+var tickerInterval = 1000;
+
 async function game() {
     let levels = [
-        nameYourself,
         javaScriptAndJava,
         howToStartJavaScript,
         caseSensitivity,
@@ -474,6 +519,8 @@ async function game() {
 
     yell('The Quiz');
 
+    playerName = await nameYourself();
+
     var pass = false;
     var index;
     for (index = 0; index < levels.length; index++) {
@@ -487,10 +534,13 @@ async function game() {
     if (pass) {
         document.bgColor = 'darkseagreen';
         yell('You win!');
+        claim('Your score is ' + credits + ' points');
     }
     else {
         document.bgColor = 'lightcoral';
+        document.fgColor = 'black';
         yell('Game over');
         say('You passed ' + index + ' level(s)');
+        say('You have ' + credits + ' points left');
     }
 }
